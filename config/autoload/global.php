@@ -12,5 +12,77 @@
  */
 
 return array(
-    // ...
+	'doctrine' => array(
+		'connection' => array(
+			'orm_default' => array(
+				'params' => array(
+					'charset'  => 'utf8',
+					'driverOptions' => array(
+						1002 => 'SET NAMES utf8'
+					),
+				),
+			),
+		),
+		'configuration' => array(
+			'orm_default' => array(
+				'metadata_cache' => 'filesystem',
+			),
+		),
+		'eventmanager' => array(
+			'orm_default' => array(
+				'subscribers' => array(
+					'Gedmo\Tree\TreeListener',
+					'Gedmo\Timestampable\TimestampableListener',
+				),
+			),
+		),
+	),
+
+	'service_manager' => array(
+		'factories' => array(
+//			'Zend\Db\Adapter\Adapter'  =>  'Zend\Db\Adapter\AdapterServiceFactory',
+			'Zend\Log' => function($sm) {
+				$log = new \Zend\Log\Logger();
+				$writer = new \Base\Util\DoctrineWriter($sm->get('doctrine.entitymanager.orm_default'));
+				$log->addWriter($writer);
+				return $log;
+			},
+		),
+	),
+
+	'view_helpers' => array(
+		'factories' => array(
+			'url' => function($sm) {
+				$locator = $sm->getServiceLocator();
+				$url = new \Base\Util\UrlViewHelper();
+
+				$router = \Zend\Console\Console::isConsole() ? 'HttpRouter' : 'Router';
+				$url->setRouter($locator->get($router));
+
+				$match = $locator->get('application')->getMvcEvent()->getRouteMatch();
+
+				if ($match instanceof \Zend\Mvc\Router\RouteMatch) {
+					$url->setRouteMatch($match);
+				}
+
+				return $url;
+			},
+		),
+	),
+
+	'module_layouts' => array(
+		'Application' => 'application/layout/layout',
+	),
+
+	'zfctwig' => array(
+		'disable_zf_model' => false,
+		'environment_options' => array(
+			'cache' => __DIR__ . '/../../data/twigcache',
+		),
+	),
+	'application' => array(
+		// application version
+		'version' => '0.1',
+		'date' => date('Y-m-d', filemtime(__FILE__)),
+	),
 );

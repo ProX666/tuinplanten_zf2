@@ -7,7 +7,7 @@ return array(
         'Application',
         'ZendDeveloperTools',
         'ZfcTwig',             // template engine
-        //'Garden',
+        'Garden',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
