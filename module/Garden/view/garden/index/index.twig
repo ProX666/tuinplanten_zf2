@@ -46,8 +46,7 @@
                 {% for plant in plants %}
                     <tr>
                         <td class="plant" id="{{ plant.getId() }}">
-                            <a href="#">
-                            </a>
+                            <a href="{{url('details', {'controller':'index', 'action':'getdata', 'id':plant.getId()}, {}, 1)}}"></a>
                             <p class="latin_name">{{ plant.getDutchName() }}</p>
                         </td>
                         <td>{{ plant.getIndigenous() }}</td>

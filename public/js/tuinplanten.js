@@ -1,7 +1,6 @@
 var $ = jQuery.noConflict();
 
 $(document).ready(function() {
-
     /**
      * Ajax call for showing features and habitats for each plant.
      */

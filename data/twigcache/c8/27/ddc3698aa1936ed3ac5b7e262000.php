@@ -72,47 +72,49 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
             // line 48
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getId", array(), "method"), "html", null, true);
             echo "\">
-                            <a href=\"#\">
-                            </a>
+                            <a href=\"";
+            // line 49
+            echo $this->env->getExtension("zfc-twig")->getRenderer()->plugin("url")->__invoke("details", array("controller" => "index", "action" => "getdata", "id" => $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getId", array(), "method")), array(), 1);
+            echo "\"></a>
                             <p class=\"latin_name\">";
-            // line 51
+            // line 50
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getDutchName", array(), "method"), "html", null, true);
             echo "</p>
                         </td>
                         <td>";
-            // line 53
+            // line 52
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getIndigenous", array(), "method"), "html", null, true);
             echo "</td>
                         <td class=\"text_center\">";
-            // line 54
+            // line 53
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getHeight", array(), "method"), "html", null, true);
             echo "&nbsp;</td>
                         <td>";
-            // line 55
+            // line 54
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getOrigin", array(), "method"), "html", null, true);
             echo "&nbsp;</td>
                         <td class=\"text_center\">";
-            // line 56
+            // line 55
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getPlantingDate", array(), "method"), "html", null, true);
             echo "&nbsp;</td>
                         <td>";
-            // line 57
+            // line 56
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["months"]) ? $context["months"] : null), $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getBloomingStart", array(), "method"), array(), "array"), "html", null, true);
             echo "</td>
                         <td>";
-            // line 58
+            // line 57
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["months"]) ? $context["months"] : null), $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getBloomingEnd", array(), "method"), array(), "array"), "html", null, true);
             echo "</td>
                         <td>";
-            // line 59
+            // line 58
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getDetails", array(), "method"), "html", null, true);
             echo "&nbsp;</td>
                         <td>";
-            // line 60
+            // line 59
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getPresent", array(), "method"), "html", null, true);
             echo "</td>
                         <td class=\"photo\" id=\"";
-            // line 61
+            // line 60
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["plant"]) ? $context["plant"] : null), "getId", array(), "method"), "html", null, true);
             echo "\">
 
@@ -131,7 +133,7 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['plant'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 74
+        // line 73
         echo "            </tbody>
         </table>
         <div id=\"popupdata\">
@@ -153,6 +155,6 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  135 => 74,  116 => 61,  112 => 60,  108 => 59,  104 => 58,  100 => 57,  96 => 56,  92 => 55,  88 => 54,  84 => 53,  79 => 51,  73 => 48,  70 => 47,  66 => 46,  19 => 1,);
+        return array (  137 => 73,  118 => 60,  114 => 59,  110 => 58,  106 => 57,  102 => 56,  98 => 55,  94 => 54,  90 => 53,  86 => 52,  81 => 50,  77 => 49,  73 => 48,  70 => 47,  66 => 46,  19 => 1,);
     }
 }

@@ -31,6 +31,23 @@ return array(
                     ),
                 ),
             ),
+            //controller':'index', 'action':'getdata', 'id':plant.getId()}, {}, 1
+            'details' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/details[/:action][/:id]',
+                    'constraints' => array(
+                        '__NAMESPACE__' => __NAMESPACE__,
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => __NAMESPACE__,
+                        'controller' => 'Garden\Controller\Index',
+                        'action' => 'getdata',
+                    ),
+                ),
+            ),
         ),
     ),
     // Add invokable controllers.

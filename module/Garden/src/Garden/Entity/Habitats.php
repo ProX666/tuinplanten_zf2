@@ -10,21 +10,26 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Habitats")
  * @ORM\Entity
  */
-class Habitats
-{
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="integer", nullable=false)
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 */
-	protected $id;
+class Habitats {
 
-	/**
-	 * @var string $habitat
-	 *
-	 * @ORM\Column(name="habitat", type="string", length=255, nullable=false)
-	 */
-	protected $habitat;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
+     * @var string $habitat
+     *
+     * @ORM\Column(name="habitat", type="string", length=255, nullable=false)
+     */
+    protected $habitat;
+
+    public function getHabitat() {
+        return $this->habitat;
+    }
+
 }

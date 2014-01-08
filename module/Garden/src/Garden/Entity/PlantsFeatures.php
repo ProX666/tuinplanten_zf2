@@ -22,13 +22,17 @@ class PlantsFeatures {
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Garden\Entity\Plants")
+     * @ORM\ManyToOne(targetEntity="Garden\Entity\Plants", inversedBy="features")
      */
     protected $plant;
 
-    /**
+        /**
      * @ORM\ManyToOne(targetEntity="Garden\Entity\Features")
      */
     protected $feature;
+
+    public function getFeature() {
+        return $this->feature->getFeature();
+    }
 
 }
