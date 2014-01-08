@@ -36,12 +36,31 @@ return array(
             )
         )
     ),
-
     'zfctwig' => array(
         'environment_options' => array(
             'auto_reload' => true,
             'debug' => true
         ),
     ),
-
+    'zenddevelopertools' => array(
+        'profiler' => array(
+            'enabled' => true,
+            ' strict' => true,
+            ' verbose' => true,
+            ' flush_early' => false,
+            ' cache_dir' => 'data/cache',
+            ' collectors' => array(),
+            ' verbose_listeners' => array('application' => array(
+                    'ZDT_TimeCollectorListener' => true,
+                    ' ZDT_MemoryCollectorListener' => true,
+                ))
+        ),
+        ' toolbar' => array(
+            'enabled' => true,
+            ' auto_hide' => false,
+            ' position' => 'bottom',
+            ' version_check' => false,
+            ' entries' => array(),
+        ),
+    ),
 );

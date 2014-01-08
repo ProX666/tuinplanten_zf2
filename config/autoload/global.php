@@ -49,27 +49,6 @@ return array(
 			},
 		),
 	),
-
-	'view_helpers' => array(
-		'factories' => array(
-			'url' => function($sm) {
-				$locator = $sm->getServiceLocator();
-				$url = new \Base\Util\UrlViewHelper();
-
-				$router = \Zend\Console\Console::isConsole() ? 'HttpRouter' : 'Router';
-				$url->setRouter($locator->get($router));
-
-				$match = $locator->get('application')->getMvcEvent()->getRouteMatch();
-
-				if ($match instanceof \Zend\Mvc\Router\RouteMatch) {
-					$url->setRouteMatch($match);
-				}
-
-				return $url;
-			},
-		),
-	),
-
 	'module_layouts' => array(
 		'Application' => 'application/layout/layout',
 	),
