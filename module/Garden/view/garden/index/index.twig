@@ -1,0 +1,80 @@
+<div id="inner-container">
+    <!-- Sidebar -->
+    <aside id="page-sidebar" class="nav-collapse collapse">
+        <!-- Sidebar search -->
+        <form id="sidebar-search" method="post" onsubmit="return false;">
+            <div class="input-append">
+                <input type="text" placeholder="Search.." class="remove-box-shadow remove-transition remove-radius">
+                <button><i class="icon-search"></i></button>
+            </div>
+        </form>
+        <!-- END Sidebar search -->
+
+        <!-- Primary Navigation -->
+        <nav id="primary-nav">
+           <!-- partials/display_nav.phtml -->
+        </nav>
+        <!-- END Primary Navigation -->
+
+    </aside>
+    <!-- END Sidebar -->
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Navigation info -->
+        <ul id="nav-info" class="clearfix">
+            <li><a href="/"><i class="icon-home"></i></a></li>
+        </ul>
+        <!-- END Navigation info -->
+
+        <table id="tuinplanten-datatables" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="text-align:left;"><span class="gemicon-small-basil"></span><a href="">naam</a></th>
+                    <th><span class="gemicon-small-home" /></th>
+                    <th><a href="">hoogte</a></th>
+                    <th><span class="gemicon-small-flag" /></th>
+                    <th><a href="">plant datum</a></th>
+                    <th><span class="gemicon-small-upload" /></th>
+                    <th><span class="gemicon-small-download" /></th>
+                    <th><span class="gemicon-small-clipboard" /></th>
+                    <th><span class="gemicon-small-eye-view" /></th>
+                    <th><span class="gemicon-small-photo" /></th>
+                    <th class="actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                    <tr>
+                        <td class="plant" id="{{ plant.getId() }}">
+                            <a href="#">
+                            </a>
+                            <p class="latin_name">{{ plant.getDutchName() }}</p>
+                        </td>
+                        <td>{{ plant.getIndigenous() }}</td>
+                        <td class="text_center">{{ plant.getHeight() }}&nbsp;</td>
+                        <td>{{ plant.getOrigin() }}&nbsp;</td>
+                        <td class="text_center">{{ plant.getPlantingDate() }}&nbsp;</td>
+                        <td>{{ months[plant.getBloomingStart()] }}</td>
+                        <td>{{ months[plant.getBloomingEnd()] }}</td>
+                        <td>{{ plant.getDetails() }}&nbsp;</td>
+                        <td>{{ plant.getPresent() }}</td>
+                        <td class="photo" id="{{ plant.getId() }}">
+
+                        </td>
+                        <td class="actions">
+                            <!--<a class="icon-eye-open" href="">
+                            </a>-->
+                            <a class="icon-edit" href="#">
+                            </a>
+                            <a class="icon-trash" href="#">
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        <div id="popupdata">
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+/**
+ *
+*/
+body{background-color:white !important;}
+body.fixed980 {width:980px !important;margin:0 auto;}
+
+#logo {
+    background-image: url('../img/logo.gif');
+    width:258px;
+    height:100px;
+}
+/**********************************
+tuinplanten-datatables
+***********************************/
+#tuinplanten-datatables{width:auto;float:left;}
+#tuinplanten-datatables img {max-width: inherit;}
+#tuinplanten-datatables th {text-align:center;}
+#tuinplanten-datatables td.plant{cursor:pointer;}
+th.planting_date{display:block;}
+td.text_center {text-align:center;}
+
+.latin_name{font-style:italic; font-size:10px;line-height:12px;}
+
+/**********************************
+Pop up: http://blog.theonlytutorials.com/a-very-simple-jquery-popup-ready-to-use-code/
+***********************************/
+#plant_overlay, #photo_overlay {
+    position: absolute;
+    border: 5px solid gray;
+    padding: 0 10px 10px 10px;
+    background: white;
+    width: 270px;
+    height: auto;
+    -webkit-border-radius: 15px;-moz-border-radius: 15px;border-radius: 15px;
+}
+
+#photo_overlay { width: 600px;}
+
+#pop{
+    display: block;
+    border: 1px solid gray;
+    width: 65px;
+    text-align: center;
+    padding: 6px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 0 auto;
+}
+
+/**********************************
+Plant image and loader
+***********************************/
+#plant_img_div {border: solid 1px black;background-color: white;height: 300px;width: 200px;float:left;margin-left:20px;}
+#plant_img {}
+#img_inner_div {margin:auto;}
+#loader {display:none;line-height: 200px;height: 300px;width: 200px;text-align:center;}
+
+a:hover {text-decoration:none;}
+
+td.photo {text-align:center;}
+#btnDone {float:right;text-decoration:underline;cursor:pointer;padding:10px;}
+
+.controls label {float:left;}
+.single_photo {padding:5px 10px 0 0;}
+
+/**********************************
+zend_form
+***********************************/
+.zend_form dt {width:20%; float:left;clear:both;margin:20px 0;}
+.zend_form dd {width:80%;}
+.form-horizontal .control-group {margin-bottom: 0px;}
