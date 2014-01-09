@@ -3,35 +3,53 @@ var $ = jQuery.noConflict();
 $(document).ready(function() {
     /**
      * Ajax call for showing features and habitats for each plant.
+     * Including caching for already loaded data.
      */
+    var data = [];
+
     $('.plant').hover(function() {
         var id = $(this).attr('id');
-        var data = {
-            'id': id
-        };
+
+        if (!data[id])
+        {
+            data[id] = {
+                'id': id
+            };
+        }
 
         var url = $(this).find('a').attr('href');
 
-        $.ajax({
-            type: "post",
-            url: url,
-            data: data,
-            //dataType: "json",
-            success: function(data) {
-                $('#popupdata').html(data);
-                $("#plant_overlay").fadeIn(500);
-                positionPopup("#plant_overlay");
-            },
-            error: function() {
-                console.log('there was an error');
-            }
-        });
+        if (data[id].response !== undefined)
+        {
+            $('#popupdata').html(data[id].response);
+            $("#plant_overlay").fadeIn(500);
+            positionPopup("#plant_overlay");
+        }
+        else
+        {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: data,
+                //dataType: "json",
+                success: function(response) {
+                    data[id].response = response;
+                    console.log(data[id]);
+                    $('#popupdata').html(response);
+                    $("#plant_overlay").fadeIn(500);
+                    positionPopup("#plant_overlay");
+                },
+                error: function() {
+                    console.log('there was an error');
+                }
+            });
+        }
     }, function() {
         $("#plant_overlay").fadeOut(200);
     }).trigger('mouseleave');
 
 
-     /**
+    /**
      * Ajax call for uploading images
      */
     $('.photo').click(function() {
@@ -68,7 +86,7 @@ $(document).ready(function() {
             top: ($(window).width() - $(theDiv).width()) / 7,
             position: 'absolute'
         });
-        $("#btnDone").click(function () {
+        $("#btnDone").click(function() {
             $(theDiv).fadeOut(200);
         });
     }
