@@ -21,12 +21,14 @@ $(document).ready(function() {
 
         if (data[id].response !== undefined)
         {
+            // show cached data
             $('#popupdata').html(data[id].response);
             $("#plant_overlay").fadeIn(500);
             positionPopup("#plant_overlay");
         }
         else
         {
+            // load new data and store in data array
             $.ajax({
                 type: "post",
                 url: url,
@@ -34,7 +36,6 @@ $(document).ready(function() {
                 //dataType: "json",
                 success: function(response) {
                     data[id].response = response;
-                    console.log(data[id]);
                     $('#popupdata').html(response);
                     $("#plant_overlay").fadeIn(500);
                     positionPopup("#plant_overlay");
