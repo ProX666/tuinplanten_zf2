@@ -39,14 +39,11 @@ class PlantsFeatures {
         return $this->feature->getId();
     }
 
-    public function setPlant(\Garden\Entity\Plants $plant) {
+
+    public function __construct(\Garden\Entity\Plants $plant, \Garden\Entity\Features $feature) {
         $this->plant = $plant;
+         $this->feature = $feature;
     }
 
-    public function setFeature(\Garden\Entity\Features $feature)
-    {
-        $this->feature = $feature;
-    }
- 
 
 }

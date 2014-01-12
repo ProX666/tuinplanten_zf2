@@ -94,7 +94,7 @@ class PlantController extends AbstractActionController {
                 $habitats = $data['habitats'];
 
                 $this->addFeatures($plant, $features);
-                $this->addHabitats($plant, $features);
+                $this->addHabitats($plant, $habitats);
 
                 $this->getEntityManager()->persist($plant);
                 $this->getEntityManager()->flush();
@@ -123,15 +123,16 @@ class PlantController extends AbstractActionController {
     }
 
     private function addFeature(\Garden\Entity\Plants $plant, $featureId) {
-        $plantsfeature = new \Garden\Entity\PlantsFeatures();
-        $this->getEntityManager()->persist($plantsfeature);
-
-        $plantsfeature->setPlant($plant);
-
+        // find feature for this featureId
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
         $featureObj = $repository->find($featureId);
-        $plantsfeature->setFeature($featureObj);
-        $plant->addFeature($plantsfeature);
+
+         // create new PlantsFeatures entry
+        $plantsfeature = new \Garden\Entity\PlantsFeatures($plant, $featureObj);
+        $this->getEntityManager()->persist($plantsfeature);
+
+        // add new PlantsFeature for this plant
+        $plant->addPlantsFeature($plantsfeature);
     }
 
     private function addHabitats(\Garden\Entity\Plants $plant, $habitats) {
@@ -150,15 +151,13 @@ class PlantController extends AbstractActionController {
     }
 
     private function addHabitat(\Garden\Entity\Plants $plant, $habitatId) {
-        $plantshabitat = new \Garden\Entity\PlantsHabitats();
-        $this->getEntityManager()->persist($plantshabitat);
-
-        $plantshabitat->setPlant($plant);
-
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Habitats');
         $habitatObj = $repository->find($habitatId);
-        $plantshabitat->setHabitat($habitatObj);
-        $plant->addHabitat($plantshabitat);
+
+        $plantshabitat = new \Garden\Entity\PlantsHabitats($plant, $habitatObj);
+        $this->getEntityManager()->persist($plantshabitat);
+
+        $plant->addPlantsHabitat($plantshabitat);
     }
 
     public function editAction() {

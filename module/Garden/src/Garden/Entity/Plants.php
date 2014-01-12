@@ -87,7 +87,7 @@ class Plants {
      */
     protected $features;
 
-    public function addFeature(\Garden\Entity\PlantsFeatures $feature) {
+    public function addPlantsFeature(\Garden\Entity\PlantsFeatures $feature) {
         $this->features[] = $feature;
     }
 
@@ -105,7 +105,7 @@ class Plants {
      */
     protected $habitats;
 
-    public function addHabitat(\Garden\Entity\PlantsHabitats $habitat) {
+    public function addPlantsHabitat(\Garden\Entity\PlantsHabitats $habitat) {
         $this->habitats[] = $habitat;
     }
 

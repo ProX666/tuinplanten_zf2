@@ -39,11 +39,8 @@ class PlantsHabitats {
         return $this->habitat->getId();
     }
 
-     public function setPlant(\Garden\Entity\Plants $plant) {
+    public function __construct(\Garden\Entity\Plants $plant, \Garden\Entity\Habitats $habitat) {
         $this->plant = $plant;
-    }
-
-    public function setHabitat(\Garden\Entity\Habitats $habitat) {
         $this->habitat = $habitat;
     }
 
