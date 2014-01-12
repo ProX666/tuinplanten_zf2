@@ -22,7 +22,7 @@ class Plants {
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Garden\Entity\Names")
+     * @ORM\ManyToOne(targetEntity="Garden\Entity\Names")
      */
     protected $name;
 
@@ -87,17 +87,14 @@ class Plants {
      */
     protected $features;
 
-    public function addFeature(\Garden\Entity\Features $feature)
-    {
+    public function addFeature(\Garden\Entity\PlantsFeatures $feature) {
         $this->features[] = $feature;
     }
 
-    public function getFeatures()
-    {
+    public function getFeatures() {
         $features = array();
 
-        foreach ($this->features as $feature)
-        {
+        foreach ($this->features as $feature) {
             $features[] = $feature->getFeature();
         }
         return $features;
@@ -108,23 +105,20 @@ class Plants {
      */
     protected $habitats;
 
-    public function addHabitat(\Garden\Entity\Habitat $habitat)
-    {
+    public function addHabitat(\Garden\Entity\PlantsHabitats $habitat) {
         $this->habitats[] = $habitat;
     }
 
-    public function getHabitats()
-    {
+    public function getHabitats() {
         $habitats = array();
 
-        foreach ($this->habitats as $habitat)
-        {
+        foreach ($this->habitats as $habitat) {
             $habitats[] = $habitat->getHabitat();
         }
         return $habitats;
     }
 
-    /***************************************************************************
+    /*     * *************************************************************************
      * Public functions
      * ************************************************************************* */
 
@@ -168,15 +162,15 @@ class Plants {
         return $this->present;
     }
 
-
-
-    public function __construct($data) {
+    public function __construct() {
         $this->features = new \Doctrine\Common\Collections\ArrayCollection();
         $this->habitats = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    public function setPlant($data) {
         $this->name = $data['name'];
         $this->indigenous = !empty($data['indigenous']) ? true : false;
-        $this->height = !empty($data['height']) ? $data['height'] : '';   // No lastnames for Twitter, thanks...
+        $this->height = !empty($data['height']) ? $data['height'] : '';
         $this->origin = !empty($data['origin']) ? $data['origin'] : '';
         $this->planting_date = new \DateTime(date('Y-m-d H:i:s'));
         $this->blooming_start = !empty($data['blooming_start']) ? $data['blooming_start'] : '';
@@ -212,6 +206,15 @@ class Plants {
 
         if (isset($values['present']))
             $this->present = $values['present'];
+    }
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy() {
+        return get_object_vars($this);
     }
 
 }

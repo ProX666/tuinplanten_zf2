@@ -1,0 +1,36 @@
+<div id="inner-container">
+    <!-- Sidebar -->
+    <aside id="page-sidebar" class="nav-collapse">
+        <!-- Sidebar search -->
+        <form id="sidebar-search" method="post" onsubmit="return false;">
+            <div class="input-append">
+                <input type="text" placeholder="Search.." class="remove-box-shadow remove-transition remove-radius">
+                <button><i class="icon-search"></i></button>
+            </div>
+        </form>
+        <!-- END Sidebar search -->
+
+        <!-- Primary Navigation -->
+        <nav id="primary-nav">
+            {% include 'garden/template/display_nav.twig' %}
+        </nav>
+            <!-- END Primary Navigation -->
+
+    </aside>
+        <!-- END Sidebar -->
+        <!-- Page Content -->
+        <div id="page-content">
+            <!-- Navigation info -->
+            <ul id="nav-info" class="clearfix">
+                <li><a href="/plants"><i class="icon-home"></i></a></li>
+            </ul>
+            <!-- END Navigation info -->
+
+          	{% do form.setAttribute('action', url(null, [], true)) %}
+            {% do form.prepare() %}
+			{{ form().openTag(form)|raw }}
+			{{ formCollection(form) }}
+			{{ form().closeTag()|raw }}
+
+        </div>
+    </div>

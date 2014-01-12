@@ -35,4 +35,18 @@ class PlantsFeatures {
         return $this->feature->getFeature();
     }
 
+    public function getFeatureId() {
+        return $this->feature->getId();
+    }
+
+    public function setPlant(\Garden\Entity\Plants $plant) {
+        $this->plant = $plant;
+    }
+
+    public function setFeature(\Garden\Entity\Features $feature)
+    {
+        $this->feature = $feature;
+    }
+ 
+
 }

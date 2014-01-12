@@ -18,7 +18,7 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
         // line 1
         echo "<div id=\"inner-container\">
     <!-- Sidebar -->
-    <aside id=\"page-sidebar\" class=\"nav-collapse collapse\">
+    <aside id=\"page-sidebar\" class=\"nav-collapse\">
         <!-- Sidebar search -->
         <form id=\"sidebar-search\" method=\"post\" onsubmit=\"return false;\">
             <div class=\"input-append\">
@@ -30,8 +30,11 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
 
         <!-- Primary Navigation -->
         <nav id=\"primary-nav\">
-           <!-- partials/display_nav.phtml -->
-        </nav>
+                ";
+        // line 15
+        $this->env->loadTemplate("garden/template/display_nav.twig")->display($context);
+        // line 16
+        echo "        </nav>
         <!-- END Primary Navigation -->
 
     </aside>
@@ -155,6 +158,6 @@ class __TwigTemplate_c827ddc3698aa1936ed3ac5b7e262000 extends Twig_Template
 
     public function getDebugInfo()
     {
-        return array (  137 => 73,  118 => 60,  114 => 59,  110 => 58,  106 => 57,  102 => 56,  98 => 55,  94 => 54,  90 => 53,  86 => 52,  81 => 50,  77 => 49,  73 => 48,  70 => 47,  66 => 46,  19 => 1,);
+        return array (  140 => 73,  121 => 60,  117 => 59,  113 => 58,  109 => 57,  105 => 56,  101 => 55,  97 => 54,  93 => 53,  89 => 52,  84 => 50,  80 => 49,  76 => 48,  73 => 47,  69 => 46,  37 => 16,  35 => 15,  19 => 1,);
     }
 }

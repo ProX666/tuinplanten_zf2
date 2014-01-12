@@ -31,7 +31,23 @@ return array(
                     ),
                 ),
             ),
-            //controller':'index', 'action':'getdata', 'id':plant.getId()}, {}, 1
+
+            'garden' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '[/[:controller[/[:action[/[:id]]]]]]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => __NAMESPACE__ . '\Controller',
+                        'controller' => 'Garden\Controller\Index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
             'details' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -53,7 +69,10 @@ return array(
     // Add invokable controllers.
     'controllers' => array(
         'invokables' => array(
-            'Garden\Controller\Index' => 'Garden\Controller\IndexController'
+            'Garden\Controller\Index' => 'Garden\Controller\IndexController',
+            'Garden\Controller\Plant' => 'Garden\Controller\PlantController',
+            'Garden\Controller\Feature' => 'Garden\Controller\FeatureController',
+            'Garden\Controller\Habitat' => 'Garden\Controller\HabitatController',
         ),
     ),
     // The module has its own [view]. Add it to the config.

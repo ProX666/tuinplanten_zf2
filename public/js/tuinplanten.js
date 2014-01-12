@@ -9,17 +9,9 @@ $(document).ready(function() {
 
     $('.plant').hover(function() {
         var id = $(this).attr('id');
-
-        if (!data[id])
-        {
-            data[id] = {
-                'id': id
-            };
-        }
-
         var url = $(this).find('a').attr('href');
 
-        if (data[id].response !== undefined)
+        if (data[id] !== undefined)
         {
             // show cached data
             $('#popupdata').html(data[id].response);
@@ -32,10 +24,11 @@ $(document).ready(function() {
             $.ajax({
                 type: "post",
                 url: url,
-                data: data,
+                data: {'id': id},
                 //dataType: "json",
                 success: function(response) {
-                    data[id].response = response;
+                    // cache reponse for this id
+                    data[id] = {'response' : response};
                     $('#popupdata').html(response);
                     $("#plant_overlay").fadeIn(500);
                     positionPopup("#plant_overlay");

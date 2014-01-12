@@ -32,4 +32,29 @@ class Habitats {
         return $this->habitat;
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setHabitat($habitat) {
+        $this->habitat = $habitat;
+    }
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
+     public function exchangeArray(array $values)
+    {
+        if (isset($values['habitat']))
+            $this->setHabitat($values['habitat']);
+    }
+
+
 }

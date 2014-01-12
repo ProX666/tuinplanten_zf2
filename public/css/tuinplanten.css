@@ -1,6 +1,7 @@
 /**
  *
 */
+.clear{clear:both}
 body{background-color:white !important;}
 body.fixed980 {width:980px !important;margin:0 auto;}
 
@@ -69,3 +70,6 @@ zend_form
 .zend_form dt {width:20%; float:left;clear:both;margin:20px 0;}
 .zend_form dd {width:80%;}
 .form-horizontal .control-group {margin-bottom: 0px;}
+
+form label{clear:both;display:block}
+form label span {width:150px;display:inline-block}

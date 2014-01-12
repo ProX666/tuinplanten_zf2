@@ -184,4 +184,52 @@ class Habitats extends \Garden\Entity\Habitats implements \Doctrine\ORM\Proxy\Pr
         return parent::getHabitat();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setHabitat($habitat)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setHabitat', array($habitat));
+
+        return parent::setHabitat($habitat);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArrayCopy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', array());
+
+        return parent::getArrayCopy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function exchangeArray(array $values)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'exchangeArray', array($values));
+
+        return parent::exchangeArray($values);
+    }
+
 }

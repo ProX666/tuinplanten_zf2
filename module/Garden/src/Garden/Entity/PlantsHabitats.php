@@ -26,7 +26,6 @@ class PlantsHabitats {
      */
     protected $plant;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Garden\Entity\Habitats")
      */
@@ -34,6 +33,18 @@ class PlantsHabitats {
 
     public function getHabitat() {
         return $this->habitat->getHabitat();
+    }
+
+    public function getHabitatId() {
+        return $this->habitat->getId();
+    }
+
+     public function setPlant(\Garden\Entity\Plants $plant) {
+        $this->plant = $plant;
+    }
+
+    public function setHabitat(\Garden\Entity\Habitats $habitat) {
+        $this->habitat = $habitat;
     }
 
 }

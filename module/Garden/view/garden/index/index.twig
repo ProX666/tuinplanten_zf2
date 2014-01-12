@@ -1,6 +1,6 @@
 <div id="inner-container">
     <!-- Sidebar -->
-    <aside id="page-sidebar" class="nav-collapse collapse">
+    <aside id="page-sidebar" class="nav-collapse">
         <!-- Sidebar search -->
         <form id="sidebar-search" method="post" onsubmit="return false;">
             <div class="input-append">
@@ -12,7 +12,7 @@
 
         <!-- Primary Navigation -->
         <nav id="primary-nav">
-           <!-- partials/display_nav.phtml -->
+                {% include 'garden/template/display_nav.twig' %}
         </nav>
         <!-- END Primary Navigation -->
 

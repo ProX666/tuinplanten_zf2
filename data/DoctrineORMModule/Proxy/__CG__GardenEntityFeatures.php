@@ -184,4 +184,52 @@ class Features extends \Garden\Entity\Features implements \Doctrine\ORM\Proxy\Pr
         return parent::getFeature();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function setFeature($feature)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFeature', array($feature));
+
+        return parent::setFeature($feature);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return (int)  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArrayCopy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', array());
+
+        return parent::getArrayCopy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function exchangeArray(array $values)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'exchangeArray', array($values));
+
+        return parent::exchangeArray($values);
+    }
+
 }
