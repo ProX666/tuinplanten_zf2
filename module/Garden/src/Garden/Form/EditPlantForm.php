@@ -5,22 +5,12 @@ namespace Garden\Form;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 
-class CreatePlantForm extends Form {
+class EditPlantForm extends Form {
 
     public function __construct($name = null) {
         // we want to ignore the name passed
         parent::__construct($name);
         $this->setAttribute('method', 'post');
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'name',
-            'tabindex' => 2,
-            'options' => array(
-                'label' => 'Naam',
-                'empty_option' => 'Selecteer een plant',
-            )
-        ));
 
         $this->add(array(
             'name' => 'indigenous',
@@ -82,29 +72,6 @@ class CreatePlantForm extends Form {
             'options' => array('label' => 'Details')
         ));
 
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'features',
-            'tabindex' => 2,
-            'attributes' => array(
-                'multiple' => 'multiple',
-            ),
-            'options' => array(
-                'label' => 'Kenmerken',
-            )
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'habitats',
-            'tabindex' => 2,
-            'attributes' => array(
-                'multiple' => 'multiple',
-            ),
-            'options' => array(
-                'label' => 'Groeiplaatsen',
-            )
-        ));
 
 
         $this->add(array(

@@ -28,7 +28,7 @@ $(document).ready(function() {
                 //dataType: "json",
                 success: function(response) {
                     // cache reponse for this id
-                    data[id] = {'response' : response};
+                    data[id] = {'response': response};
                     $('#popupdata').html(response);
                     $("#plant_overlay").fadeIn(500);
                     positionPopup("#plant_overlay");
@@ -45,30 +45,30 @@ $(document).ready(function() {
 
     /**
      * Ajax call for uploading images
-     */
-    $('.photo').click(function() {
-        var id = $(this).attr('id');
-        var data = {
-            'id': id
-        };
 
-        var url = $(this).find('.upload_url').val();
+    $('.photo').on('click', function(event) {
+        event.preventDefault();
+        var url = $(this).attr("href");
 
         $.ajax({
             type: "post",
             url: url,
-            data: data,
-            //dataType: "json",
             success: function(data) {
-                $('#popupdata').html(data);
-                $("#photo_overlay").fadeIn(500);
-                positionPopup("#photo_overlay");
+                    $('#popupdata').html(data);
+                    $("#photo_overlay").fadeIn(500);
+                    positionPopup("#photo_overlay");
             },
             error: function() {
                 console.log('there was an error');
             }
         });
     });
+
+    $(document).on("submit", "form#Upload", function(event) {
+        var wait = "<img src='/img/loader.gif' />";
+        $('form#Upload').empty().html(wait);
+    });
+*/
 
     //position the popup at the center of the page
     function positionPopup(theDiv) {
@@ -88,12 +88,30 @@ $(document).ready(function() {
     //maintain the popup at center of the page when browser resized
     $(window).bind('resize', positionPopup);
 
-    $('#planting_date').datepicker({dateFormat: 'dd/mm/yyyy', defaultDate: new Date()});
-    $('#planting_date').focus(function() {
+    $('.planting_date').datepicker({dateFormat: 'dd/mm/yyyy', defaultDate: new Date()});
+    $('.planting_date').focus(function() {
         $(this).datepicker("show");
         setTimeout(function() {
-            $('#planting_date').datepicker("hide");
-            $('#planting_date').blur();
+            $('.planting_date').datepicker("hide");
+            $('.planting_date').blur();
         }, 2000)
     })
+
+    // display photo for plants
+    $('.thumb_photo').each(function() {
+        var photourl = $(this).data('file');
+        var img = $(this);
+        $.ajax({
+            type: "post",
+            url: photourl,
+            success: function(src) {
+                img.attr("src", src);
+            },
+            error: function() {
+                console.log('there was an error');
+            }
+        });
+
+
+    });
 });

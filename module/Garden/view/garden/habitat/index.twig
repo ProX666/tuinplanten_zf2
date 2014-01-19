@@ -1,51 +1,21 @@
-<div id="inner-container">
-    <!-- Sidebar -->
-    <aside id="page-sidebar" class="nav-collapse">
-        <!-- Sidebar search -->
-        <form id="sidebar-search" method="post" onsubmit="return false;">
-            <div class="input-append">
-                <input type="text" placeholder="Search.." class="remove-box-shadow remove-transition remove-radius">
-                <button><i class="icon-search"></i></button>
-            </div>
-        </form>
-        <!-- END Sidebar search -->
-
-        <!-- Primary Navigation -->
-        <nav id="primary-nav">
-            {% include 'garden/template/display_nav.twig' %}
-            </nav>
-            <!-- END Primary Navigation -->
-
-        </aside>
-        <!-- END Sidebar -->
-        <!-- Page Content -->
-        <div id="page-content">
-            <!-- Navigation info -->
-            <ul id="nav-info" class="clearfix">
-                <li><a href="/plants"><i class="icon-home"></i></a></li>
-            </ul>
-            <!-- END Navigation info -->
-
-            <table id="tuinplanten-datatables" class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th style="text-align:left;"><span class="gemicon-small-basil"></span><a href="">groeiplaats</a></th>
-                        <th class="actions"></th>
-                    </tr>
-                </thead>
-                <tbody>
+<table id="tuinplanten-datatables" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="text-align:left;"><span class="gemicon-small-basil"></span><a href="">groeiplaats</a></th>
+            <th class="actions"></th>
+        </tr>
+    </thead>
+    <tbody>
                 {% for habitat in habitats %}
-                        <tr>
-                            <td class="text_center">{{ habitat.getHabitat() }}&nbsp;</td>
-                            <td class="actions">
-                                <a class="icon-edit" href="{{url('garden', {'controller':'habitat','action':'edit','id':habitat.getId()}, {}, 1)}}"></a>
+            <tr>
+                <td class="text_center">{{ habitat.getHabitat() }}&nbsp;</td>
+                <td class="actions">
+                    <a class="icon-edit" href="{{url('garden', {'controller':'habitat','action':'edit','id':habitat.getId()}, {}, 1)}}"></a>
                                 {% if habitat.getId() not in habitatsUsed %}
-                                <a class="icon-trash" href="{{url('garden', {'controller':'habitat','action':'delete','id':habitat.getId()}, {}, 1)}}"></a>
+                    <a class="icon-trash" href="{{url('garden', {'controller':'habitat','action':'delete','id':habitat.getId()}, {}, 1)}}"></a>
                                 {% endif %}
-                            </td>
-                        </tr>
+                </td>
+            </tr>
                 {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </tbody>
+    </table>

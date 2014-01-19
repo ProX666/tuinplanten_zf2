@@ -1,4 +1,5 @@
 <?php
+
 namespace Garden\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -15,19 +16,21 @@ class IndexController extends AbstractActionController {
         return $this->em;
     }
 
+    protected function getConfig() {
+        if (!isset($this->config)) {
+            $this->config = $this->getServiceLocator()->get('config');
+        }
+
+        return $this->config;
+    }
+
+    protected function getConfigItem($item) {
+        $config = $this->getConfig();
+        return $config[$item];
+    }
+
     public function indexAction() {
-        $months = array(1 => 'jan',
-            2 => 'feb',
-            3 => 'mrt',
-            4 => 'apr',
-            5 => 'mei',
-            6 => 'jun',
-            7 => 'jul',
-            8 => 'aug',
-            9 => 'sep',
-            10 => 'okt',
-            11 => 'nov',
-            12 => 'dec');
+        $months = $months = $this->getConfigItem('months');
 
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Plants');
         $plants = $repository->findAll();
@@ -63,7 +66,6 @@ class IndexController extends AbstractActionController {
             'habitats' => $habitats
         ));
         return $result;
-
     }
 
 }

@@ -9,4 +9,9 @@ nbproject
 composer.lock
 vendor/bin
 vendor
+data/DoctrineModule
+data/DoctrineORMModule
+data/cache
+data/twigcache
+public/uploads
 

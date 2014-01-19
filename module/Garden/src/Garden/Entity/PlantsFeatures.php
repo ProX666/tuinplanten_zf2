@@ -26,7 +26,7 @@ class PlantsFeatures {
      */
     protected $plant;
 
-        /**
+    /**
      * @ORM\ManyToOne(targetEntity="Garden\Entity\Features")
      */
     protected $feature;
@@ -39,11 +39,9 @@ class PlantsFeatures {
         return $this->feature->getId();
     }
 
-
     public function __construct(\Garden\Entity\Plants $plant, \Garden\Entity\Features $feature) {
         $this->plant = $plant;
-         $this->feature = $feature;
+        $this->feature = $feature;
     }
-
 
 }

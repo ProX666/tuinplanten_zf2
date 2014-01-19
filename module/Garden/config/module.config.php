@@ -64,6 +64,21 @@ return array(
                     ),
                 ),
             ),
+            'thumb' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/thumb[/:id]',
+                    'constraints' => array(
+                        '__NAMESPACE__' => __NAMESPACE__,
+                        'id' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => __NAMESPACE__,
+                        'controller' => 'Garden\Controller\Photo',
+                        'action' => 'thumb',
+                    ),
+                ),
+            ),
         ),
     ),
     // Add invokable controllers.
@@ -73,6 +88,7 @@ return array(
             'Garden\Controller\Plant' => 'Garden\Controller\PlantController',
             'Garden\Controller\Feature' => 'Garden\Controller\FeatureController',
             'Garden\Controller\Habitat' => 'Garden\Controller\HabitatController',
+            'Garden\Controller\Photo' => 'Garden\Controller\PhotoController',
         ),
     ),
     // The module has its own [view]. Add it to the config.

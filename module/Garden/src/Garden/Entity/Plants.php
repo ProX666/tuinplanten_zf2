@@ -83,12 +83,28 @@ class Plants {
     protected $present;
 
     /**
+     * @var boolean $deleted
+     *
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    protected $deleted;
+
+    /**
      * @ORM\OneToMany(targetEntity="Garden\Entity\PlantsFeatures", mappedBy="plant")
      */
     protected $features;
 
     public function addPlantsFeature(\Garden\Entity\PlantsFeatures $feature) {
         $this->features[] = $feature;
+    }
+
+    public function getFeatureIds() {
+        $features = array();
+
+        foreach ($this->features as $feature) {
+            $features[] = $feature->getFeatureId();
+        }
+        return $features;
     }
 
     public function getFeatures() {
@@ -118,6 +134,15 @@ class Plants {
         return $habitats;
     }
 
+    public function getHabitatIds() {
+        $habitats = array();
+
+        foreach ($this->habitats as $habitat) {
+            $habitats[] = $habitat->getHabitatId();
+        }
+        return $habitats;
+    }
+
     /*     * *************************************************************************
      * Public functions
      * ************************************************************************* */
@@ -128,6 +153,10 @@ class Plants {
 
     public function getDutchName() {
         return $this->name->getDutchName();
+    }
+
+    public function getNameId() {
+        return $this->name->getId();
     }
 
     public function getHeight() {
@@ -162,6 +191,64 @@ class Plants {
         return $this->present;
     }
 
+    public function getDeleted() {
+        return $this->deleted;
+    }
+
+
+    // setters
+     public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setIndigenous($indigenous) {
+        $this->indigenous = $indigenous;
+    }
+
+    public function setHeight($height) {
+        $this->height = $height;
+    }
+
+    public function setOrigin($origin) {
+        $this->origin = $origin;
+    }
+
+    public function setPlantingDate($planting_date) {
+        $this->planting_date = $planting_date;
+    }
+
+    public function setPresent($present) {
+        $this->present = $present;
+    }
+
+    public function setDetails($details) {
+        $this->details = $details;
+    }
+
+     public function setBloomingStart($blooming_start) {
+        $this->blooming_start = $blooming_start;
+    }
+
+     public function setBloomingEnd($blooming_end) {
+        $this->blooming_end = $blooming_end;
+    }
+
+    public function setDeleted() {
+        $this->deleted = true;
+    }
+
+     public function setFeatures($features) {
+        $this->features = $features;
+    }
+
+    public function setHabitats($habitats) {
+        $this->habitats = $habitats;
+    }
+
+
+    /**
+    *
+    */
     public function __construct() {
         $this->features = new \Doctrine\Common\Collections\ArrayCollection();
         $this->habitats = new \Doctrine\Common\Collections\ArrayCollection();
@@ -177,6 +264,7 @@ class Plants {
         $this->blooming_end = !empty($data['blooming_end']) ? $data['blooming_end'] : '';
         $this->details = !empty($data['details']) ? $data['details'] : '';
         $this->present = !empty($data['present']) ? true : false;
+        $this->deleted = false;
     }
 
     public function exchangeArray(array $values) {
@@ -193,7 +281,7 @@ class Plants {
             $this->origin = $values['origin'];
 
         if (isset($values['planting_date']))
-            $this->planting_date = $values['planting_date'];
+            $this->planting_date = new \DateTime(date($values['planting_date']));
 
         if (isset($values['blooming_start']))
             $this->blooming_start = $values['blooming_start'];
@@ -206,6 +294,12 @@ class Plants {
 
         if (isset($values['present']))
             $this->present = $values['present'];
+
+//        if (isset($values['features']))
+//            $this->features = $values['features'];
+//
+//        if (isset($values['habitats']))
+//            $this->habitats = $values['habitats'];
     }
 
     /**
