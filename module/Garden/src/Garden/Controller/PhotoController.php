@@ -84,31 +84,54 @@ class PhotoController extends AbstractActionController {
                 }
             }
         }
-//
-//        $result = new ViewModel();
-//        $result->setTerminal(true);
-//        $result->setVariables(array(
-//            'id' => $id,
-//            'form' => $form
-//        ));
-        //$this->layout('layout/layout-empty.twig');
         return array(
             'id' => $id,
             'form' => $form
         );
     }
 
-    
+    public function firstphotoAction() {
+        $id = $this->params('id');
 
-    public function thumbAction() {
-        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+        $repository = $this->getEntityManager()->getRepository('Garden\Entity\Plants');
+        $plant = $repository->find($id);
 
-        $query = $this->getEntityManager()->createQuery('SELECT p.filename FROM Garden\Entity\Uploads p where p.selected=true AND p.plant = ' . $id);
-        if ($photo = $query->getResult()) {
-            echo "/uploads/thumbs/" . $photo[0]['filename'];
+        $form = new \Garden\Form\FirstPhotoForm($id, "Firstphoto");
+        $form->setLabel("Foto kiezen");
+        $form->get('submit')->setValue('Kies');
+        $form->setAttribute('class', 'form-horizontal form-box');
+        $form->get('firstPhoto')->setValueOptions($this->getPhotoArray($id));
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $post = $request->getPost();
+            $form->setData($post);
+            if ($form->isValid()) {
+                try {
+                    $formdata = $form->getData();
+                    $upload_repository = $this->getEntityManager()->getRepository('Garden\Entity\Uploads');
+                    if ($photo = $upload_repository->findOneBy(array('selected' => true, 'plant' => $plant))) {
+                        $photo->setSelected(false);
+                    }
+
+                    if ($photo = $upload_repository->findOneBy(array('id' => $formdata['firstPhoto'], 'plant' => $plant))) {
+                        $photo->setSelected(true);
+                    }
+
+                    $this->getEntityManager()->flush();
+                    return $this->redirect()->toUrl('/');
+                } catch (Exception $ex) {
+                    echo "Exception!\n";
+                    echo $ex->getMessage();
+                }
+            }
         }
-        die;
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
     }
+
 
     public function imageToThumbAction($height, $file, $filename) {
         $imagesConfig = $this->getConfigItem('images');
@@ -117,16 +140,16 @@ class PhotoController extends AbstractActionController {
         $image = $imagine->open($file);
 
         $image->resize(
-// get original size and set width (widen) or height (heighten).
-// width or height will be set maintaining aspect ratio.
+        // get original size and set width (widen) or height (heighten).
+        // width or height will be set maintaining aspect ratio.
                 $image->getSize()->heighten($height)
         );
         $image->save($imagesConfig['thumbs'] . '/' . $filename);
 
         return;
-// $size = new \Imagine\Image\Box($width, $height);
-// $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
-// $imagine->open($file)->thumbnail($size, $mode)->save($imagesConfig['thumbs'] . '/' . $filename);
+        // $size = new \Imagine\Image\Box($width, $height);
+        // $mode = \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND;
+        // $imagine->open($file)->thumbnail($size, $mode)->save($imagesConfig['thumbs'] . '/' . $filename);
     }
 
     public function getImagineService() {

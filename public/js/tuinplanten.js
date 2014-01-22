@@ -98,6 +98,7 @@ $(document).ready(function() {
     })
 
     // display photo for plants
+    /*
     $('.thumb_photo').each(function() {
         var photourl = $(this).data('file');
         var img = $(this);
@@ -114,4 +115,5 @@ $(document).ready(function() {
 
 
     });
+    */
 });

@@ -143,6 +143,10 @@ class Plants {
         return $habitats;
     }
 
+    public function getFirstPhoto() {
+
+    }
+
     /*     * *************************************************************************
      * Public functions
      * ************************************************************************* */
@@ -295,11 +299,6 @@ class Plants {
         if (isset($values['present']))
             $this->present = $values['present'];
 
-//        if (isset($values['features']))
-//            $this->features = $values['features'];
-//
-//        if (isset($values['habitats']))
-//            $this->habitats = $values['habitats'];
     }
 
     /**

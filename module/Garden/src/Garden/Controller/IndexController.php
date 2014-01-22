@@ -35,9 +35,18 @@ class IndexController extends AbstractActionController {
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Plants');
         $plants = $repository->findAll();
 
+        $photos = array();
+        $upload_repository = $this->getEntityManager()->getRepository('Garden\Entity\Uploads');
+        foreach ($plants as $plant) {
+            if ($photo = $upload_repository->findOneBy(array('selected' => true, 'plant' => $plant))) {
+                $photos[$plant->getId()] = $photo->getFileName();
+            }
+        }
+
         return array(
             'months' => $months,
             'plants' => $plants,
+            'photos' => $photos
         );
     }
 

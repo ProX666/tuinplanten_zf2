@@ -9,17 +9,17 @@
 
 namespace Garden;
 
-use Zend\Mvc\ModuleRouteListener;
+//use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-        \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Gedmo\Mapping\Annotation', 'vendor/gedmo/doctrine-extensions/lib');
+        //$eventManager        = $e->getApplication()->getEventManager();
+       //$moduleRouteListener = new ModuleRouteListener();
+        //$moduleRouteListener->attach($eventManager);
+       // \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Gedmo\Mapping\Annotation', 'vendor/gedmo/doctrine-extensions/lib');
     }
 
     public function getConfig()

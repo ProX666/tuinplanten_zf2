@@ -68,6 +68,10 @@ class Uploads {
      */
     protected $selected;
 
+    public function getFileName() {
+        return $this->filename;
+    }
+
     public function setSelected($bool) {
         $this->selected = $bool;
     }
@@ -95,6 +99,7 @@ class Uploads {
     }
 
 
+    /*
     public function getFirstPhoto($id) {
         if (!empty($id)) {
 
@@ -124,5 +129,5 @@ class Uploads {
             return $uploads;
         }
     }
-
+*/
 }

@@ -32,8 +32,17 @@
                 <td>{{ plant.getDetails() }}&nbsp;</td>
                 <td>{{ plant.getPresent() }}</td>
                 <td>
-                    <img class="thumb_photo" src="/img/loader.gif" data-file="{{url('garden', {'controller':'photo', 'action':'thumb', 'id':plant.getId()}, {}, 1)}}" />
-                    <a class="photo gemicon-small-camera" href="{{url('garden', {'controller':'photo', 'action':'upload', 'id':plant.getId()}, {}, 1)}}"></a>
+                    <img class="thumb_photo" src="/uploads/thumbs/{{ photos[plant.getId()]}}" />
+                    <table>
+                        <tr>
+                            <td>
+                                <a class="photo gemicon-small-camera" href="{{url('garden', {'controller':'photo', 'action':'upload', 'id':plant.getId()}, {}, 1)}}"></a>
+                            </td>
+                            <td>
+                                <a class="gemicon-small-basil" href="{{url('garden', {'controller':'photo', 'action':'firstphoto', 'id':plant.getId()}, {}, 1)}}"></a>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
                 <td class="actions">
                     <!--<a class="icon-eye-open" href="">
