@@ -26,6 +26,7 @@ class FirstPhotoForm extends Form {
         $this->add(array(
             'type' => 'Zend\Form\Element\Radio',
             'name' => 'firstPhoto',
+            'attributes' => array('class' => 'firstPhoto'),
             'options' => array(
                 'label' => 'Kies eerste foto',
                 'value_options' => array(
@@ -53,7 +54,7 @@ class FirstPhotoForm extends Form {
             $inputFilter->add(
                     $factory->createInput(array(
                         'name' => 'firstPhoto',
-                        'required' => false,
+                        'required' => true,
                     ))
             );
 

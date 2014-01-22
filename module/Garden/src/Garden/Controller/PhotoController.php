@@ -97,7 +97,6 @@ class PhotoController extends AbstractActionController {
         $plant = $repository->find($id);
 
         $form = new \Garden\Form\FirstPhotoForm($id, "Firstphoto");
-        $form->setLabel("Foto kiezen");
         $form->get('submit')->setValue('Kies');
         $form->setAttribute('class', 'form-horizontal form-box');
         $form->get('firstPhoto')->setValueOptions($this->getPhotoArray($id));
@@ -181,6 +180,16 @@ class PhotoController extends AbstractActionController {
         }
 
         return $photoArray;
+    }
+
+     public function thumbAction() {
+        $id = $this->getEvent()->getRouteMatch()->getParam('id');
+
+        $query = $this->getEntityManager()->createQuery('SELECT p.filename FROM Garden\Entity\Uploads p where p.id = ' . $id);
+        if ($photo = $query->getResult()) {
+            echo "/uploads/thumbs/" . $photo[0]['filename'];
+        }
+        die;
     }
 
 }

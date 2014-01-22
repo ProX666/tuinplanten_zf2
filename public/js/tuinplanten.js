@@ -46,29 +46,29 @@ $(document).ready(function() {
     /**
      * Ajax call for uploading images
 
-    $('.photo').on('click', function(event) {
-        event.preventDefault();
-        var url = $(this).attr("href");
+     $('.photo').on('click', function(event) {
+     event.preventDefault();
+     var url = $(this).attr("href");
 
-        $.ajax({
-            type: "post",
-            url: url,
-            success: function(data) {
-                    $('#popupdata').html(data);
-                    $("#photo_overlay").fadeIn(500);
-                    positionPopup("#photo_overlay");
-            },
-            error: function() {
-                console.log('there was an error');
-            }
-        });
-    });
+     $.ajax({
+     type: "post",
+     url: url,
+     success: function(data) {
+     $('#popupdata').html(data);
+     $("#photo_overlay").fadeIn(500);
+     positionPopup("#photo_overlay");
+     },
+     error: function() {
+     console.log('there was an error');
+     }
+     });
+     });
 
-    $(document).on("submit", "form#Upload", function(event) {
-        var wait = "<img src='/img/loader.gif' />";
-        $('form#Upload').empty().html(wait);
-    });
-*/
+     $(document).on("submit", "form#Upload", function(event) {
+     var wait = "<img src='/img/loader.gif' />";
+     $('form#Upload').empty().html(wait);
+     });
+     */
 
     //position the popup at the center of the page
     function positionPopup(theDiv) {
@@ -94,19 +94,20 @@ $(document).ready(function() {
         setTimeout(function() {
             $('.planting_date').datepicker("hide");
             $('.planting_date').blur();
-        }, 2000)
-    })
+        }, 2000);
+    });
 
     // display photo for plants
-    /*
-    $('.thumb_photo').each(function() {
-        var photourl = $(this).data('file');
-        var img = $(this);
+    $('.firstPhoto').each(function() {
+        var firstphoto = $(this);
+        var photo_id = firstphoto.val();
+        var img = "";
         $.ajax({
             type: "post",
-            url: photourl,
+            url: 'photo/thumb/' + photo_id,
             success: function(src) {
-                img.attr("src", src);
+                img = "<img src='" + src + "' />";
+                firstphoto.after(img);
             },
             error: function() {
                 console.log('there was an error');
@@ -114,6 +115,8 @@ $(document).ready(function() {
         });
 
 
+
     });
-    */
 });
+
+
