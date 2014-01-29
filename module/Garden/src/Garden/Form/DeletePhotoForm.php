@@ -4,7 +4,7 @@ namespace Garden\Form;
 
 use Zend\Form\Form;
 
-class FirstPhotoForm extends Form {
+class DeletePhotoForm extends Form {
 
     private $_id;
     private $inputFilter;
@@ -24,11 +24,11 @@ class FirstPhotoForm extends Form {
 
         // create radio buttons for first photo selection
         $this->add(array(
-            'type' => 'Zend\Form\Element\Radio',
-            'name' => 'firstPhoto',
+            'type' => 'Zend\Form\Element\MultiCheckbox',
+            'name' => 'deletePhoto',
             'attributes' => array('class' => 'firstPhoto'),
             'options' => array(
-                'label' => 'Kies eerste foto',
+                'label' => 'Selecteer de te verwijderen foto(s)',
                 'value_options' => array(
                 ),
             )
@@ -52,8 +52,8 @@ class FirstPhotoForm extends Form {
 
             $inputFilter->add(
                     $factory->createInput(array(
-                        'name' => 'firstPhoto',
-                        'required' => true,
+                        'name' => 'deletePhoto',
+                        'required' => false,
                     ))
             );
 

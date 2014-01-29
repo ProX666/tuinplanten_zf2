@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5{font-weight: bold;}
 /**********************************
 tuinplanten-datatables
 ***********************************/
-#tuinplanten-datatables{width:auto;float:left;}
+#tuinplanten-datatables{width:100%;float:left;}
 #tuinplanten-datatables img {max-width: inherit;}
 #tuinplanten-datatables th {text-align:center;}
 #tuinplanten-datatables td.plant{cursor:pointer;}
@@ -79,3 +79,5 @@ form label span {width:150px;display:inline-block;}
 
 #page-content{background-color:#f5f5f5}
 legend {margin-bottom:0}
+
+#tuinplanten-datatables th {cursor:pointer;}

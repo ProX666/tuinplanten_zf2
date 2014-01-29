@@ -159,6 +159,10 @@ class Plants {
         return $this->name->getDutchName();
     }
 
+    public function getLatinName() {
+        return $this->name->getLatinName();
+    }
+
     public function getNameId() {
         return $this->name->getId();
     }
@@ -176,7 +180,7 @@ class Plants {
     }
 
     public function getPlantingDate() {
-        return $this->planting_date->format('Y-m-d');
+        return $this->planting_date->format('d-m-Y');
     }
 
     public function getBloomingStart() {

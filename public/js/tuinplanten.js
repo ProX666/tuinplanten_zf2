@@ -1,6 +1,23 @@
 var $ = jQuery.noConflict();
 
 $(document).ready(function() {
+    $("#tuinplanten-datatables").tablesorter({
+        theme: 'tuinplanten',
+        headers: {
+            1: {sorter: false},
+            8: {sorter: false},
+            9: {sorter: false},
+            10: {sorter: false},
+        }
+    });
+
+
+    $("table")
+            .tablesorter({widthFixed: true, widgets: ['zebra']})
+            .tablesorterPager({
+        container: $("#pager"),
+        size: 10
+    });
     /**
      * Ajax call for showing features and habitats for each plant.
      * Including caching for already loaded data.
@@ -42,6 +59,11 @@ $(document).ready(function() {
         $("#plant_overlay").fadeOut(200);
     }).trigger('mouseleave');
 
+    $(document).mousemove(function(event) {
+        if ($('#plant_overlay').is(':visible')) {
+            $('#plant_overlay').css({'top': currentMousePos.y, 'left': currentMousePos.x});
+        }
+    });
 
     /**
      * Ajax call for uploading images
@@ -70,16 +92,25 @@ $(document).ready(function() {
      });
      */
 
+    var currentMousePos = {x: -1, y: -1};
+    $(document).mousemove(function(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    });
+
     //position the popup at the center of the page
     function positionPopup(theDiv) {
         if (!$(theDiv).is(':visible')) {
             return;
         }
-        $(theDiv).css({
-            left: ($(window).width() - $(theDiv).width()) / 2,
-            top: ($(window).width() - $(theDiv).width()) / 7,
-            position: 'absolute'
-        });
+//        $(theDiv).css({
+//            left: ($(window).width() - $(theDiv).width()) / 2,
+//            top: ($(window).width() - $(theDiv).width()) / 7,
+//            position: 'absolute'
+//        });
+
+       $(theDiv).css({'top': currentMousePos.y, 'left': currentMousePos.x});
+
         $("#btnDone").click(function() {
             $(theDiv).fadeOut(200);
         });

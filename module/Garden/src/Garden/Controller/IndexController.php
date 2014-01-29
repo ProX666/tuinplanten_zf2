@@ -40,6 +40,8 @@ class IndexController extends AbstractActionController {
         foreach ($plants as $plant) {
             if ($photo = $upload_repository->findOneBy(array('selected' => true, 'plant' => $plant))) {
                 $photos[$plant->getId()] = $photo->getFileName();
+            } else {
+                $photos[$plant->getId()] = "default";
             }
         }
 

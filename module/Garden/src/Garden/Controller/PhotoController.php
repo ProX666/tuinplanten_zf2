@@ -131,7 +131,6 @@ class PhotoController extends AbstractActionController {
         );
     }
 
-
     public function imageToThumbAction($height, $file, $filename) {
         $imagesConfig = $this->getConfigItem('images');
         $imagine = $this->getImagineService();
@@ -139,8 +138,8 @@ class PhotoController extends AbstractActionController {
         $image = $imagine->open($file);
 
         $image->resize(
-        // get original size and set width (widen) or height (heighten).
-        // width or height will be set maintaining aspect ratio.
+                // get original size and set width (widen) or height (heighten).
+                // width or height will be set maintaining aspect ratio.
                 $image->getSize()->heighten($height)
         );
         $image->save($imagesConfig['thumbs'] . '/' . $filename);
@@ -179,10 +178,10 @@ class PhotoController extends AbstractActionController {
             $photoArray[$photo['id']] = $photo['title'];
         }
 
-        return $photoArray;
+        return !empty($photoArray) ? $photoArray : null;
     }
 
-     public function thumbAction() {
+    public function thumbAction() {
         $id = $this->getEvent()->getRouteMatch()->getParam('id');
 
         $query = $this->getEntityManager()->createQuery('SELECT p.filename FROM Garden\Entity\Uploads p where p.id = ' . $id);
@@ -190,6 +189,54 @@ class PhotoController extends AbstractActionController {
             echo "/uploads/thumbs/" . $photo[0]['filename'];
         }
         die;
+    }
+
+    public function deleteAction() {
+        $imagesConfig = $this->getConfigItem('images');
+        $id = $this->params('id');
+
+        $repository = $this->getEntityManager()->getRepository('Garden\Entity\Plants');
+
+        $form = new \Garden\Form\DeletePhotoForm($id, "Deletephoto");
+        $form->get('submit')->setValue('Kies');
+        $form->setAttribute('class', 'form-horizontal form-box');
+
+        if ($photos = $this->getPhotoArray($id)) {
+            $form->get('deletePhoto')->setValueOptions($photos);
+        } else {
+            $this->flashMessenger()->addMessage('Er zijn geen foto\'s voor deze plant.');
+            return $this->redirect()->toUrl('/');
+        }
+
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $post = $request->getPost();
+            $form->setData($post);
+            if ($form->isValid()) {
+                try {
+                    $formdata = $form->getData();
+                    $repository = $this->getEntityManager()->getRepository('Garden\Entity\Uploads');
+                    foreach ($formdata['deletePhoto'] as $delete) {
+                        $photo = $repository->findOneBy(array('id' => $delete));
+
+                        unlink($imagesConfig['original'] . '/' . $photo->getFileName());
+                        unlink($imagesConfig['thumbs'] . '/' . $photo->getFileName());
+
+                        $this->getEntityManager()->remove($photo);
+                    }
+                    $this->getEntityManager()->flush();
+                    return $this->redirect()->toUrl('/');
+                } catch (Exception $ex) {
+                    echo "Exception!\n";
+                    echo $ex->getMessage();
+                }
+            }
+        }
+        return array(
+            'id' => $id,
+            'form' => $form,
+        );
     }
 
 }
