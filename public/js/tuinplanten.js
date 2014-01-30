@@ -1,23 +1,25 @@
 var $ = jQuery.noConflict();
 
 $(document).ready(function() {
-    $("#tuinplanten-datatables").tablesorter({
+
+    $("#tuinplanten-datatables")
+            .tablesorter({
         theme: 'tuinplanten',
+        widthFixed: true,
+        widgets: ['zebra'],
         headers: {
             1: {sorter: false},
+            7: {sorter: false},
             8: {sorter: false},
             9: {sorter: false},
-            10: {sorter: false},
+            10: {sorter: false}
         }
-    });
-
-
-    $("table")
-            .tablesorter({widthFixed: true, widgets: ['zebra']})
+    })
             .tablesorterPager({
         container: $("#pager"),
         size: 10
     });
+
     /**
      * Ajax call for showing features and habitats for each plant.
      * Including caching for already loaded data.
@@ -109,7 +111,7 @@ $(document).ready(function() {
 //            position: 'absolute'
 //        });
 
-       $(theDiv).css({'top': currentMousePos.y, 'left': currentMousePos.x});
+        $(theDiv).css({'top': currentMousePos.y, 'left': currentMousePos.x});
 
         $("#btnDone").click(function() {
             $(theDiv).fadeOut(200);

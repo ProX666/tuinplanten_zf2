@@ -44,49 +44,52 @@
                                     <a class="photo gemicon-small-camera" href="{{url('garden', {'controller':'photo', 'action':'upload', 'id':plant.getId()}, {}, 1)}}"></a>
                                 </td>
                                 <td>
-                                    <a class="gemicon-small-basil" href="{{url('garden', {'controller':'photo', 'action':'firstphoto', 'id':plant.getId()}, {}, 1)}}"></a>
-                                </td>
-                                <td>
-                                 {% if photos[plant.getId()] != 'default' %}
-                                        <a class="gemicon-small-trash-can" href="{{url('garden', {'controller':'photo', 'action':'delete', 'id':plant.getId()}, {}, 1)}}"></a>
+                                    {% if photos[plant.getId()] != 'default' %}
+                                        <a class="gemicon-small-basil" href="{{url('garden', {'controller':'photo', 'action':'firstphoto', 'id':plant.getId()}, {}, 1)}}"></a>
                                 {% endif %}
                                     </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td class="actions">
-                            <!--<a class="icon-eye-open" href="">
-                            </a>-->
-                            <a class="icon-edit" href="{{url('garden', {'controller':'plant', 'action':'edit', 'id':plant.getId()}, {}, 1)}}">
-                            </a>
-                            <a class="icon-trash" href="{{url('garden', {'controller':'plant', 'action':'delete', 'id':plant.getId()}, {}, 1)}}">
-                            </a>
-                        </td>
-                    </tr>
+
+                                    <td>
+                                 {% if photos[plant.getId()] != 'default' %}
+                                            <a class="gemicon-small-trash-can" href="{{url('garden', {'controller':'photo', 'action':'delete', 'id':plant.getId()}, {}, 1)}}"></a>
+                                {% endif %}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="actions">
+                                <!--<a class="icon-eye-open" href="">
+                                </a>-->
+                                <a class="icon-edit" href="{{url('garden', {'controller':'plant', 'action':'edit', 'id':plant.getId()}, {}, 1)}}">
+                                </a>
+                                <a class="icon-trash" href="{{url('garden', {'controller':'plant', 'action':'delete', 'id':plant.getId()}, {}, 1)}}">
+                                </a>
+                            </td>
+                        </tr>
                     {% endif %}
                 {% endfor %}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
 
-            <div id="pager" class="pager">
-                <form>
-                    <img src="/addons/pager/icons/first.png" class="first"/>
-                    <img src="/addons/pager/icons/prev.png" class="prev"/>
-                    <input type="text" class="pagedisplay"/>
-                    <img src="/addons/pager/icons/next.png" class="next"/>
-                    <img src="/addons/pager/icons/last.png" class="last"/>
-                    <select class="pagesize">
-                        <option selected="selected"  value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option  value="40">40</option>
-                    </select>
-                </form>
-            </div>
+                <div id="pager" class="pager">
+                    <form>
+                        <img src="/addons/pager/icons/first.png" class="first"/>
+                        <img src="/addons/pager/icons/prev.png" class="prev"/>
+                        <input type="text" class="pagedisplay"/>
+                        <img src="/addons/pager/icons/next.png" class="next"/>
+                        <img src="/addons/pager/icons/last.png" class="last"/>
+                        <select class="pagesize">
+                            <option selected="selected"  value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option  value="40">40</option>
+                        </select>
+                    </form>
+                </div>
 
 
 
-            <div id="popupdata">
+                <div id="popupdata">
 
-            </div>
+                </div>
