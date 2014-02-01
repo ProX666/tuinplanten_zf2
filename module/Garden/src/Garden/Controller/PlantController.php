@@ -4,6 +4,7 @@ namespace Garden\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\FormInterface;
+use Zend\View\Model\ViewModel;
 
 class PlantController extends AbstractActionController {
 
@@ -106,9 +107,12 @@ class PlantController extends AbstractActionController {
             }
         }
 
-        return array(
+        $result = new ViewModel();
+        $result->setTerminal(true);
+        $result->setVariables(array(
             'form' => $form,
-        );
+        ));
+        return $result;
     }
 
     private function addFeatures(\Garden\Entity\Plants $plant, $features) {

@@ -4,26 +4,22 @@ namespace Garden\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Garden\Controller\BaseController;
 
-class FeatureController extends AbstractActionController {
+class FeatureController extends BaseController
+{
 
-    protected $em;
-
-    protected function getEntityManager() {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
-
-    public function indexAction() {
+    public function indexAction()
+    {
         // get all used features
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\PlantsFeatures');
         $featuresWithPlants = $repository->findAll();
 
         $featuresUsed = array();
-        foreach ($featuresWithPlants as $feature) {
-            if (!in_array($feature->getFeatureId(), $featuresUsed)) {
+        foreach ($featuresWithPlants as $feature)
+        {
+            if (!in_array($feature->getFeatureId(), $featuresUsed))
+            {
                 $featuresUsed[] = $feature->getFeatureId();
             }
         }
@@ -31,13 +27,16 @@ class FeatureController extends AbstractActionController {
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
         $features = $repository->findAll();
 
-        return array(
+        $this->result->setVariables(array(
             'features' => $features,
             'featuresUsed' => $featuresUsed
-        );
+        ));
+
+        return $this->result;
     }
 
-    public function createAction() {
+    public function createAction()
+    {
         $form = new \Garden\Form\CreateFeatureForm("Create Feature");
         $feature = new \Garden\Entity\Features();
 
@@ -47,22 +46,26 @@ class FeatureController extends AbstractActionController {
         $form->bind($feature);
 
         $request = $this->getRequest();
-        if ($request->isPost()) {
+        if ($request->isPost())
+        {
             $form->setData($request->getPost());
-            if ($form->isValid()) {
+            if ($form->isValid())
+            {
                 $this->getEntityManager()->persist($feature);
                 $this->getEntityManager()->flush();
                 return $this->redirect()->toUrl('/feature/index');
             }
         }
 
-        return array(
+        $this->result->setVariables(array(
             'form' => $form,
-        );
+        ));
+
+        return $this->result;
     }
 
-
-    public function editAction() {
+    public function editAction()
+    {
         $form = new \Garden\Form\CreateFeatureForm("Edit Feature");
         $form->setLabel("Kenmerk aanpassen");
         $form->get('submit')->setValue('Pas aan');
@@ -75,21 +78,26 @@ class FeatureController extends AbstractActionController {
         $form->bind($feature);
 
         $request = $this->getRequest();
-        if ($request->isPost()) {
+        if ($request->isPost())
+        {
             $form->setData($request->getPost());
-            if ($form->isValid()) {
+            if ($form->isValid())
+            {
                 $this->getEntityManager()->persist($feature);
                 $this->getEntityManager()->flush();
                 return $this->redirect()->toUrl('/feature/index');
             }
         }
 
-        return array(
+        $this->result->setVariables(array(
             'form' => $form,
-        );
+        ));
+
+        return $this->result;
     }
 
-    public function deleteAction() {
+    public function deleteAction()
+    {
         $id = $this->params('id');
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
         $feature = $repository->find($id);

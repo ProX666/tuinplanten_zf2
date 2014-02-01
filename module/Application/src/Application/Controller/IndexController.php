@@ -16,6 +16,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        die('opakso');
         return new ViewModel();
     }
 }

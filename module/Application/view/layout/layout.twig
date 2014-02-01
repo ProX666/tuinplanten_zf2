@@ -37,9 +37,6 @@
         <!-- END Icons -->
 
         <!-- Stylesheets -->
-        <!-- The roboto font is included from Google Web Fonts -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic">
-
         <base href="/" />
         <link rel="stylesheet" href="../../../css/main.css" />
         <link rel="stylesheet" href="../../../css/bootstrap.css" />
@@ -49,21 +46,20 @@
         <link rel="stylesheet" href="../../../js/jqueryUI/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="../themes/tuinplanten/style.css" type="text/css" media="print, projection, screen" />
 
-        <!-- END Stylesheets -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
 
-        <!-- Modernizr (Browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support them) -->
-        <script src="../../../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <!-- END Stylesheets -->
     </head>
 
-    <body class="fixed980">
+    <body class="fixed980" ng-app="garden">
 
         <!-- Page Container -->
         <div id="page-container">
 
             <header class="">
                 <div id="logo"></div>
-
-                <h1>Tuinplanten</h1>
             </header>
             <!-- END Header -->
                               {% if flashMessenger().hasMessages() %}
@@ -105,7 +101,8 @@
                                             <li><a href="/"><i class="icon-home"></i></a></li>
                                         </ul>
                                         <!-- END Navigation info -->
-                                            {{ content | raw }}
+                                        <div ui-view></div>
+{#                                            {{ content | raw }}#}
                                     </div>
 
                                 </div>
@@ -125,15 +122,16 @@
                     <!-- Jquery library from Google ... -->
 
                     {% do inlineScript().prependFile('/js/bootstrap.min.js') %}
+
                         {% do inlineScript().prependFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js') %}
-                        {% do inlineScript().prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') %}
                         {% do inlineScript().appendFile('/js/jquery.tablesorter.min.js') %}
                         {% do inlineScript().appendFile('/addons/pager/jquery.tablesorter.pager.js') %}
                         {% do inlineScript().appendFile('/js/tuinplanten.js') %}
+                        {% do inlineScript().appendFile('/js/controllers/gardenCtrl.js') %}
                         {% do inlineScript().appendFile('/js/plugins.js') %}
-                        {% do inlineScript().appendFile('/js/main.js') %}
+                        {#{% do inlineScript().appendFile('/js/main.js') %}#}
                     {{ inlineScript() }}
-
+                    <script type="text/javascript" src="js/angular-ui-router.js"></script>
 
                     <!-- Include Google Maps API for global use -->
                     <!-- Jquery plugins and custom javascript code

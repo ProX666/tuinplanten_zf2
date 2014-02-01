@@ -4,32 +4,13 @@ namespace Garden\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Garden\Controller\BaseController;
 
-class IndexController extends AbstractActionController {
+class IndexController extends BaseController
+{
 
-    protected $em;
-
-    protected function getEntityManager() {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
-
-    protected function getConfig() {
-        if (!isset($this->config)) {
-            $this->config = $this->getServiceLocator()->get('config');
-        }
-
-        return $this->config;
-    }
-
-    protected function getConfigItem($item) {
-        $config = $this->getConfig();
-        return $config[$item];
-    }
-
-    public function indexAction() {
+    public function indexAction()
+    {
         $months = $months = $this->getConfigItem('months');
 
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Plants');
@@ -37,19 +18,23 @@ class IndexController extends AbstractActionController {
 
         $photos = array();
         $upload_repository = $this->getEntityManager()->getRepository('Garden\Entity\Uploads');
-        foreach ($plants as $plant) {
-            if ($photo = $upload_repository->findOneBy(array('selected' => true, 'plant' => $plant))) {
+        foreach ($plants as $plant)
+        {
+            if ($photo = $upload_repository->findOneBy(array('selected' => true, 'plant' => $plant)))
+            {
                 $photos[$plant->getId()] = $photo->getFileName();
-            } else {
+            } else
+            {
                 $photos[$plant->getId()] = "default";
             }
         }
 
-        return array(
+         $this->result->setVariables(array(
             'months' => $months,
             'plants' => $plants,
             'photos' => $photos
-        );
+        ));
+        return $this->result;
     }
 
     /**
@@ -58,7 +43,8 @@ class IndexController extends AbstractActionController {
      *
      * @request id  : single id for one plant
      */
-    public function getdataAction() {
+    public function getdataAction()
+    {
 
         $id = $this->getEvent()->getRouteMatch()->getParam('id');
 
@@ -68,15 +54,13 @@ class IndexController extends AbstractActionController {
         $features = $plant->getFeatures();
         $habitats = $plant->getHabitats();
 
-        $result = new ViewModel();
-        $result->setTerminal(true);
-        $result->setVariables(array(
+        $this->result->setVariables(array(
             'id' => $id,
             'plant' => $plant,
             'features' => $features,
             'habitats' => $habitats
         ));
-        return $result;
+        return $this->result;
     }
 
 }

@@ -26,7 +26,7 @@ return array(
                 'options' => array(
                     'route' => '/',
                     'defaults' => array(
-                        'controller' => 'Garden\Controller\Index',
+                        'controller' => 'Garden\Controller\Home',
                         'action' => 'index',
                     ),
                 ),
@@ -43,7 +43,7 @@ return array(
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => __NAMESPACE__ . '\Controller',
-                        'controller' => 'Garden\Controller\Index',
+                        'controller' => 'Garden\Controller\Home',
                         'action' => 'index',
                     ),
                 ),
@@ -84,6 +84,8 @@ return array(
     // Add invokable controllers.
     'controllers' => array(
         'invokables' => array(
+            'Garden\Controller\Home' => 'Garden\Controller\HomeController',
+            'Garden\Controller\Base' => 'Garden\Controller\BaseController',
             'Garden\Controller\Index' => 'Garden\Controller\IndexController',
             'Garden\Controller\Plant' => 'Garden\Controller\PlantController',
             'Garden\Controller\Feature' => 'Garden\Controller\FeatureController',
