@@ -1,6 +1,6 @@
 <?php
 
-namespace Garden\Controller;
+namespace Base\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -42,5 +42,25 @@ class BaseController extends AbstractActionController
         $this->result = new ViewModel();
         $this->result->setTerminal(true);
     }
+
+    protected function getView()
+	{
+		if (!$this->view)
+		{
+			if ($this->params('format') == 'json' || $this->params()->fromQuery('json') !== null)
+			{
+				$this->view = new JsonModel();
+			}
+			else
+			{
+				$this->view = new ViewModel();
+				if ($this->params('format') == 'tpl')
+				{
+					$this->view->setTerminal(true)->setVariable('format', 'tpl');
+				}
+			}
+		}
+		return $this->view;
+	}
 
 }

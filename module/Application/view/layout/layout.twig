@@ -53,7 +53,7 @@
         <!-- END Stylesheets -->
     </head>
 
-    <body class="fixed980" ng-app="garden">
+    <body class="fixed980" ng-app="gardenApp">
 
         <!-- Page Container -->
         <div id="page-container">
@@ -127,6 +127,8 @@
                         {% do inlineScript().appendFile('/js/jquery.tablesorter.min.js') %}
                         {% do inlineScript().appendFile('/addons/pager/jquery.tablesorter.pager.js') %}
                         {% do inlineScript().appendFile('/js/tuinplanten.js') %}
+                        {% do inlineScript().appendFile('/js/app/garden.js') %}
+                        {% do inlineScript().appendFile('/js/app/controllers.js') %}
                         {% do inlineScript().appendFile('/js/controllers/gardenCtrl.js') %}
                         {% do inlineScript().appendFile('/js/plugins.js') %}
                         {#{% do inlineScript().appendFile('/js/main.js') %}#}

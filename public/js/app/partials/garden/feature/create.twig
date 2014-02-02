@@ -1,0 +1,5 @@
+          	{% do form.setAttribute('action', url(null, [], true)) %}
+            {% do form.prepare() %}
+			{{ form().openTag(form)|raw }}
+			{{ formCollection(form) }}
+			{{ form().closeTag()|raw }}

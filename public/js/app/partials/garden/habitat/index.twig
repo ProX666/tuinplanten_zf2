@@ -1,0 +1,21 @@
+<table id="tuinplanten-datatables" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="text-align:left;"><span class="gemicon-small-basil"></span><a href="">groeiplaats</a></th>
+            <th class="actions"></th>
+        </tr>
+    </thead>
+    <tbody>
+                {% for habitat in habitats %}
+            <tr>
+                <td class="text_center">{{ habitat.getHabitat() }}&nbsp;</td>
+                <td class="actions">
+                    <a class="icon-edit" href="{{url('garden', {'controller':'habitat','action':'edit','id':habitat.getId()}, {}, 1)}}"></a>
+                                {% if habitat.getId() not in habitatsUsed %}
+                    <a class="icon-trash" href="{{url('garden', {'controller':'habitat','action':'delete','id':habitat.getId()}, {}, 1)}}"></a>
+                                {% endif %}
+                </td>
+            </tr>
+                {% endfor %}
+        </tbody>
+    </table>

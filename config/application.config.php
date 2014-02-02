@@ -8,6 +8,7 @@ return array(
         'ZendDeveloperTools',
         'ZfcTwig',             // template engine
         'Garden',
+        'Base'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

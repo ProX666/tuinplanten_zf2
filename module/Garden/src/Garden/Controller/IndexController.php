@@ -4,7 +4,7 @@ namespace Garden\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Garden\Controller\BaseController;
+use Base\Controller\BaseController;
 
 class IndexController extends BaseController
 {
