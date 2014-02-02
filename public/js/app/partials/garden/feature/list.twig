@@ -2,10 +2,16 @@
     <thead>
         <tr>
             <th ng-click="predicate = 'name'; reverse=!reverse" style="text-align:left;"><span class="gemicon-small-basil"></span><a href="">kenmerk</a></th>
-            <th class="actions"></th>
+            <th class="actions"><button class="icon-pencil" ng-click="openCreateFeature()"></button></th>
         </tr>
     </thead>
     <tbody>
+        <tr ng-hide="hideCreate">
+            <td ng-include="'/feature/create/'">
+            </td>
+            <td>
+            </td>
+        </tr>
         <tr ng-repeat="feature in features | orderBy:predicate:reverse">
             <td class="text_center">[[ feature.name ]]&nbsp;</td>
             <td class="actions">

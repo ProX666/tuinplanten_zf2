@@ -14,15 +14,21 @@ garden.controller('featureCtrl', ['$scope', '$http', '$location', function($scop
         };
 
         $scope.editFeature = function(id) {
-//            $location.path('/feature/edit/' + id);
             $http.post('/feature/edit/' + id).success(function(response) {
-                console.log(response);
                 $("#editform").html(response);
             });
         };
 
-        $scope.createFeature = function() {
-            console.log('call addAlbum');
-            $location.path("/feature/create");
+        $scope.hideCreate = true;
+        $scope.openCreateFeature = function() {
+            $scope.hideCreate = false;
+        };
+
+        $scope.newfeature = {"name": ""};
+        $scope.submit = function() {
+            $http.post('feature/createprocess', $scope.newfeature).success(function(result) {
+                $scope.hideCreate = true;
+                load();
+            });
         };
     }]);

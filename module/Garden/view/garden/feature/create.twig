@@ -1,5 +1,11 @@
-          	{% do form.setAttribute('action', url(null, [], true)) %}
+   <!--    {% do form.setAttribute('action', url(null, [], true)) %}
             {% do form.prepare() %}
 			{{ form().openTag(form)|raw }}
 			{{ formCollection(form) }}
 			{{ form().closeTag()|raw }}
+            <button class="btn" ng-click="submit()">Save</button>
+-->
+<form name="login_form"> <!-- ng-submit="submit()" -->
+    Kenmerk: <input type="text" ng-model="newfeature.name" /><br />
+    <button class="btn btn-primary" ng-click="submit()">save</button>
+</form>

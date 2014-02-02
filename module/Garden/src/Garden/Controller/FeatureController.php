@@ -9,33 +9,34 @@ use Zend\View\Model\JsonModel;
 
 class FeatureController extends BaseController
 {
-/*
-    public function indexAction()
-    {
-        // get all used features
-        $repository = $this->getEntityManager()->getRepository('Garden\Entity\PlantsFeatures');
-        $featuresWithPlants = $repository->findAll();
+    /*
+      public function indexAction()
+      {
+      // get all used features
+      $repository = $this->getEntityManager()->getRepository('Garden\Entity\PlantsFeatures');
+      $featuresWithPlants = $repository->findAll();
 
-        $featuresUsed = array();
-        foreach ($featuresWithPlants as $feature)
-        {
-            if (!in_array($feature->getFeatureId(), $featuresUsed))
-            {
-                $featuresUsed[] = $feature->getFeatureId();
-            }
-        }
+      $featuresUsed = array();
+      foreach ($featuresWithPlants as $feature)
+      {
+      if (!in_array($feature->getFeatureId(), $featuresUsed))
+      {
+      $featuresUsed[] = $feature->getFeatureId();
+      }
+      }
 
-        $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
-        $features = $repository->findAll();
+      $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
+      $features = $repository->findAll();
 
-        $this->result->setVariables(array(
-            'features' => $features,
-            'featuresUsed' => $featuresUsed
-        ));
+      $this->result->setVariables(array(
+      'features' => $features,
+      'featuresUsed' => $featuresUsed
+      ));
 
-        return $this->result;
-    }
-*/
+      return $this->result;
+      }
+     */
+
     public function listAction()
     {
         // get all used features
@@ -71,12 +72,24 @@ class FeatureController extends BaseController
         return new JsonModel($data);
     }
 
+    public function createprocessAction()
+    {
+        $data = json_decode(file_get_contents("php://input"));
+
+        $feature = new \Garden\Entity\Features();
+        $feature->setFeature($data->name);
+        $this->getEntityManager()->persist($feature);
+        $this->getEntityManager()->flush();
+        echo "success";
+        die;
+    }
+
     public function createAction()
     {
-        $form = new \Garden\Form\CreateFeatureForm("Create Feature");
+        $form = new \Garden\Form\CreateFeatureForm("CreateFeature");
+        /*
         $feature = new \Garden\Entity\Features();
 
-        $form->setLabel("Nieuw Kenmerk");
         $form->get('submit')->setValue('Voeg toe');
 
         $form->bind($feature);
@@ -91,7 +104,7 @@ class FeatureController extends BaseController
                 $this->getEntityManager()->flush();
                 return $this->redirect()->toUrl('/#/kenmerken');
             }
-        }
+        }*/
 
         $this->result->setVariables(array(
             'form' => $form,
