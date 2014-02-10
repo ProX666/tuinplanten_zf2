@@ -16,14 +16,14 @@ class CreateFeatureForm extends Form {
             'attributes' => array('type' => 'text', 'placeholder' => 'Geef nieuw kenmerk', 'size' => '25'),
         ));
 
-       /* $this->add(array(
+        $this->add(array(
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Go',
                 'id' => 'submitbutton',
             ),
-        ));*/
+        ));
     }
 
     public function getInputFilter() {

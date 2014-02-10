@@ -26,7 +26,9 @@ garden.controller('featureCtrl', ['$scope', '$http', '$location', function($scop
 
         $scope.newfeature = {"name": ""};
         $scope.submit = function() {
-            $http.post('feature/createprocess', $scope.newfeature).success(function(result) {
+            $('.btn').hide();
+            $http.post('feature/create', $scope.newfeature)
+                    .success(function(result) {
                 $scope.hideCreate = true;
                 load();
             });
