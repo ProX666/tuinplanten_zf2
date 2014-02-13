@@ -1,3 +1,4 @@
+<div ng-controller="featureCtrl">
 <table id="tuinplanten-datatables" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
@@ -13,13 +14,16 @@
             </td>
         </tr>
         <tr ng-repeat="feature in features | orderBy:predicate:reverse">
-            <td class="text_center">[[ feature.name ]]&nbsp;</td>
+            <td class="text_center">
+                [[ feature.name ]]
+            </td>
             <td class="actions">
-                <!--<a class="icon-edit" href="{{url('garden', {'controller':'feature','action':'edit','id':feature.getId()}, {}, 1)}}"></a> -->
                 <button class="icon-edit" ng-click="editFeature(feature.id)"></button>
                 <button ng-if="feature.delete" class="icon-trash" ng-click="deleteFeature(feature.id); features.splice($index, 1) "></button>
             </td>
         </tr>
     </tbody>
 </table>
-<div id="editform"></div>
+<div ng-bind-html="editform"></div>
+
+</div>

@@ -1,5 +1,4 @@
-
-garden.controller('featureCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+garden.controller('featureCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
         var load = function() {
             $http.get('/feature/list')
                     .success(function(data) {
@@ -14,8 +13,9 @@ garden.controller('featureCtrl', ['$scope', '$http', '$location', function($scop
         };
 
         $scope.editFeature = function(id) {
+            alert("edit");
             $http.post('/feature/edit/' + id).success(function(response) {
-                $("#editform").html(response);
+                $scope.editform = $sce.trustAsHtml(response);
             });
         };
 
@@ -25,12 +25,21 @@ garden.controller('featureCtrl', ['$scope', '$http', '$location', function($scop
         };
 
         $scope.newfeature = {"name": ""};
-        $scope.submit = function() {
-            $('.btn').hide();
-            $http.post('feature/create', $scope.newfeature)
-                    .success(function(result) {
+        $scope.submitNew = function() {
+            alert("new");
+            $http.post('/feature/create', $scope.newfeature)
+                    .success(function() {
                 $scope.hideCreate = true;
                 load();
             });
+        };
+
+        // id?
+        $scope.submitUpdate = function() {
+            alert("update");
+           /* $http.post('/feature/edit').success(function() {
+                $scope.hideCreate = true;
+                load();
+            });*/
         };
     }]);

@@ -4,8 +4,15 @@
 			{{ formCollection(form) }}
 			{{ form().closeTag()|raw }}
             <button class="btn" ng-click="submit()">Save</button>
--->
-<form name="login_form"> <!-- ng-submit="submit()" -->
+
+<form name="login_form">
     Kenmerk: <input type="text" ng-model="newfeature.name" /><br />
     <button class="btn btn-primary" ng-click="submit()">save</button>
+</form>
+-->
+
+
+<form name="new_feature" class="ng-scope ng-valid ng-dirty" ng-submit="submitNew()">
+    Kenmerk: <input type="text" ng-model="newfeature.name" class="ng-valid ng-dirty"><br>
+    <button class="btn btn-primary">save</button>
 </form>

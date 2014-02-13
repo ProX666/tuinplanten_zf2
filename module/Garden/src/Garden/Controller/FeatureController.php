@@ -73,7 +73,7 @@ class FeatureController extends BaseController
     {
 
         $form = new \Garden\Form\CreateFeatureForm("CreateFeature");
-        $form->get('submit')->setValue('Pas aan');
+        //$form->get('submit')->setValue('Pas aan');
 
         $id = $this->params('id');
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
@@ -82,11 +82,11 @@ class FeatureController extends BaseController
         $form->bind($feature);
 
         $request = $this->getRequest();
-        if ($request->isPost())
+        if ($request->isXmlHttpRequest())
         {
-            $data = json_decode(file_get_contents("php://input"));
+            $data = json_decode(json_encode($request->getPost()), true);
 
-            $feature->setFeature($data->name);
+            $feature->setFeature($data['feature']);
             $this->getEntityManager()->persist($feature);
             $this->getEntityManager()->flush();
             echo "success";

@@ -1,5 +1,11 @@
-          	{% do form.setAttribute('action', url(null, [], true)) %}
+<!--          	{% do form.setAttribute('action', url(null, [], true)) %}
             {% do form.prepare() %}
 			{{ form().openTag(form)|raw }}
 			{{ formCollection(form) }}
 			{{ form().closeTag()|raw }}
+-->
+<form name="edit_feature" class="ng-scope ng-valid ng-dirty" ng-submit="submitUpdate()">
+	{{ form().openTag(form)|raw }}
+	{{ formCollection(form) }}
+    <button class="btn btn-primary">save</button>
+</form>
