@@ -1,8 +1,19 @@
-garden.controller('featureCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+garden.controller('featureCtrl', ['$scope', '$http', '$sce', 'featuresProvider', function($scope, $http, $sce, featuresProvider) {
+        /*var load = function() {
+         $http.get('/feature/list')
+         .success(function(data) {
+         $scope.features = data.features;
+         });
+         };*/
+//        featureLoader.get().then(function(data) {
+//            $scope.features = data;
+//            console.log($scope.features);
+//        });
+
         var load = function() {
-            $http.get('/feature/list')
-                    .success(function(data) {
-                $scope.features = data.features;
+            featuresProvider.get().then(function(response) {
+                console.log(response);
+                $scope.features = response.data;
             });
         };
 
@@ -26,7 +37,6 @@ garden.controller('featureCtrl', ['$scope', '$http', '$sce', function($scope, $h
 
         $scope.newfeature = {"name": ""};
         $scope.submitNew = function() {
-            alert("new");
             $http.post('/feature/create', $scope.newfeature)
                     .success(function() {
                 $scope.hideCreate = true;
@@ -37,9 +47,9 @@ garden.controller('featureCtrl', ['$scope', '$http', '$sce', function($scope, $h
         // id?
         $scope.submitUpdate = function() {
             alert("update");
-           /* $http.post('/feature/edit').success(function() {
-                $scope.hideCreate = true;
-                load();
-            });*/
+            /* $http.post('/feature/edit').success(function() {
+             $scope.hideCreate = true;
+             load();
+             });*/
         };
     }]);

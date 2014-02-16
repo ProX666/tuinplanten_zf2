@@ -37,11 +37,7 @@ class FeatureController extends BaseController
             );
         }
 
-        $data = array(
-            'features' => $features,
-        );
-
-        return new JsonModel($data);
+        return new JsonModel($features);
     }
 
     public function createAction()

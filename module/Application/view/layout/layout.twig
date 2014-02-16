@@ -46,14 +46,15 @@
         <link rel="stylesheet" href="../../../js/jqueryUI/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="../themes/tuinplanten/style.css" type="text/css" media="print, projection, screen" />
 
-        <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
 
 
         <!-- END Stylesheets -->
     </head>
 
     <body class="fixed980" ng-app="gardenApp">
+
 
         <!-- Page Container -->
         <div id="page-container">
@@ -101,7 +102,9 @@
                                             <li><a href="/"><i class="icon-home"></i></a></li>
                                         </ul>
                                         <!-- END Navigation info -->
+                                        <div pleasewait>Please wait...</div>
                                         <div ui-view></div>
+
 {#                                            {{ content | raw }}#}
                                     </div>
 
@@ -124,11 +127,14 @@
                     {% do inlineScript().prependFile('/js/bootstrap.min.js') %}
 
                         {% do inlineScript().prependFile('http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js') %}
+
                         {% do inlineScript().appendFile('/js/jquery.tablesorter.min.js') %}
                         {% do inlineScript().appendFile('/addons/pager/jquery.tablesorter.pager.js') %}
                         {% do inlineScript().appendFile('/js/tuinplanten.js') %}
                         {% do inlineScript().appendFile('/js/app/garden.js') %}
                         {% do inlineScript().appendFile('/js/app/controllers.js') %}
+                        {% do inlineScript().appendFile('/js/app/directives.js') %}
+                        {% do inlineScript().appendFile('/js/app/services.js') %}
                         {% do inlineScript().appendFile('/js/controllers/gardenCtrl.js') %}
                         {% do inlineScript().appendFile('/js/plugins.js') %}
                         {#{% do inlineScript().appendFile('/js/main.js') %}#}
