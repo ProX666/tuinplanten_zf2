@@ -9,7 +9,8 @@ use Zend\View\Model\JsonModel;
 
 class FeatureController extends BaseController
 {
-     public function listAction()
+
+    public function listAction()
     {
         // get all used features
         $repository = $this->getEntityManager()->getRepository('Garden\Entity\PlantsFeatures');
@@ -65,68 +66,26 @@ class FeatureController extends BaseController
         }
     }
 
-    public function editAction()
+    public function updateAction()
     {
-
-        $form = new \Garden\Form\CreateFeatureForm("CreateFeature");
-        //$form->get('submit')->setValue('Pas aan');
-
-        $id = $this->params('id');
-        $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
-        $feature = $repository->find($id);
-
-        $form->bind($feature);
-
-        $request = $this->getRequest();
-        if ($request->isXmlHttpRequest())
+        if (file_get_contents("php://input"))
         {
-            $data = json_decode(json_encode($request->getPost()), true);
+            $data = json_decode(file_get_contents("php://input"));
+            $id = $data->id;
+            $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
+            $feature = $repository->find($id);
 
-            $feature->setFeature($data['feature']);
+            $feature->setFeature($data->name);
             $this->getEntityManager()->persist($feature);
             $this->getEntityManager()->flush();
             echo "success";
             die;
         } else
         {
-            $this->result->setVariables(array(
-                'form' => $form,
-            ));
-
-            return $this->result;
+            echo "error";
+            die;
         }
-
-        // --
-        /*
-        $form = new \Garden\Form\CreateFeatureForm("Edit Feature");
-        $form->setLabel("Kenmerk aanpassen");
-        $form->get('submit')->setValue('Pas aan');
-
-        $id = $this->params('id');
-
-        $repository = $this->getEntityManager()->getRepository('Garden\Entity\Features');
-        $feature = $repository->find($id);
-
-        $form->bind($feature);
-
-        $request = $this->getRequest();
-        if ($request->isPost())
-        {
-            $form->setData($request->getPost());
-            if ($form->isValid())
-            {
-                $this->getEntityManager()->persist($feature);
-                $this->getEntityManager()->flush();
-                return $this->redirect()->toUrl('/feature/index');
-            }
-        }
-
-        $this->result->setVariables(array(
-            'form' => $form,
-        ));
-
-        return $this->result;
-         */
+        die;
     }
 
     public function deleteAction()

@@ -7,11 +7,6 @@ garden.config(['$urlRouterProvider', '$stateProvider', '$interpolateProvider',
 
         $urlRouterProvider.otherwise('/');
         $stateProvider
-//                .state('home', {
-//            url: '/',
-//            templateUrl: 'application/index',
-//            controller: 'homeCtrl'
-//        })
                 .state('garden', {
             url: '/tuin',
             templateUrl: '/index/index',
@@ -30,6 +25,11 @@ garden.config(['$urlRouterProvider', '$stateProvider', '$interpolateProvider',
                 .state('features', {
             url: '/kenmerken',
             templateUrl: '/js/app/partials/garden/feature/list.twig',
+            controller: 'featureCtrl'
+        })
+        .state('updatefeature', {
+            url: '/bewerk-kenmerk',
+            templateUrl: '/feature/update',
             controller: 'featureCtrl'
         })
                 .state('newfeature', {

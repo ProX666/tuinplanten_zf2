@@ -14,10 +14,9 @@
         </tr>
             <tr ng-repeat="feature in features | orderBy:predicate:reverse">
                 <td class="text_center">
-                    [[ feature.name ]]
+                <div click-to-edit="feature"></div>
                 </td>
                 <td class="actions">
-                    <button class="icon-edit" ng-click="editFeature(feature.id)"></button>
                     <button ng-if="feature.delete" class="icon-trash" ng-click="deleteFeature(feature.id); features.splice($index, 1) "></button>
                 </td>
             </tr>

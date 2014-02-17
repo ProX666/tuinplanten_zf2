@@ -1,0 +1,12 @@
+<div class="click-to-edit">
+    <div ng-hide="view.editorEnabled">
+            {{value.name}}
+            <a style="float:right" ng-click="enableEditor()"><button class="icon-edit"></button></a>
+        </div>
+        <div ng-show="view.editorEnabled">
+            <input ng-model="view.editableValue">
+            <a href="#" ng-click="save()">save</a>
+            |
+            <a ng-click="disableEditor()">cancel</a>
+        </div>
+    </div>
